@@ -69,7 +69,22 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
+# Netflix GPT
+ - create react app
+ - configured TailwindCss
+ - Header
+ - Routing or App
+ - Login Form
+ - Sign up form
+ - Form validation
+ - useRef Hook
+ - Firebase setup
+ - deploying our app to production
+ - create signup user accout
+ - create signin user account
+ - create redux store with userslice
+ - created signout
+ - added update profile
 # Features
 -Login/Sign up
     - Sign in/sign up
@@ -115,3 +130,16 @@ useRef is a hook used for refencing
     - Say No to overwriting index.html if asked
 -  firebase deploy
 
+## Authentication
+- authenticate the user using firebase authentication
+
+- nee to store the object id in redux store
+
+
+# onAuthStateChanged api
+is called whenever user signed in signed out this will be called automatically
+ 
+ u can set dispatch actions inside this api and 
+ place this in useEffect(because u want to call these only once)
+
+ # useNavigate is a hook used to navigate

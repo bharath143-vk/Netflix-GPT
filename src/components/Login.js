@@ -1,22 +1,90 @@
 import React, { useState,useRef } from 'react'
 import Header from './Header'
 import checkValidation from '../utils/validate'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../utils/firebase'
+import { useNavigate } from 'react-router-dom';
+import { updateProfile } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
+
 const Login = () => {
 
     const[signInForm,setSignInForm]=useState(true)
     const[errorMessage,setErrorMessage]=useState(null)
+    const navigate=useNavigate()
+    const dispatch=useDispatch()
 
     const email=useRef(null)
     const password=useRef(null)
+    const name=useRef(null)
 
     const toggleSignInForm=()=>{
         setSignInForm(!signInForm);
     }
 
+    const handleSignUp = async () => {
+      try {
+        setErrorMessage("");
+        
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email.current.value,
+          password.current.value
+        );
+        console.log(name.current)
+        // ✅ Set displayName and photoURL (optional)
+       
+        await updateProfile(userCredential.user, {
+          
+          displayName: name.current?.value||"guest",
+          photoURL: "https://i.pravatar.cc/150?img=3", // optional
+        });
+         
+       
+        // ✅ Dispatch updated user to Redux
+        dispatch(
+          addUser({
+            uid: userCredential.user.uid,
+            email: userCredential.user.email,
+            displayName: name.current?.value || "guest",
+            photoURL: "https://i.pravatar.cc/150?img=3",
+          })
+        );
+
+        console.log("Signup and profile update successful");
+      } catch (err) {
+        console.error("Error during signup or profile update:", err.message);
+        setErrorMessage(err.message);
+      }
+    };
+
+
+
+    const handleSignIn = async () => {
+      try {
+        setErrorMessage("");
+        await signInWithEmailAndPassword(auth, email.current.value, password.current.value);
+       
+      } catch (err) {
+        setErrorMessage(err.message); // 👈 Set error to state
+      }
+    };
+
     
     const handleSubmit=()=>{
       const message=checkValidation(email.current.value,password.current.value)
       setErrorMessage(message)
+      if(message)return;
+
+      if(!signInForm){
+        handleSignUp()
+        navigate('/browse')
+      }
+      else{
+       handleSignIn()
+       navigate('/browse')
+      }
     }
 
     
@@ -34,12 +102,14 @@ const Login = () => {
             onSubmit={(e)=> e.preventDefault()}>
                 <h2 className='text-3xl p-2 m-2 font-bold'>{signInForm?"Sign in":"Sign up"}</h2>
                 {
-                    !signInForm && 
-                    <input
-                        type="text" 
-                        placeholder='Enter Name'
-                        className='p-2 my-4 w-full bg-gray-700'
+                   !signInForm && 
+                        <input
+                          type="text" 
+                          placeholder="Enter Name"
+                          ref={name}
+                          className="p-2 my-4 w-full bg-gray-700"
                         />
+                      
                 }
                 
                 <input
