@@ -85,6 +85,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
  - create redux store with userslice
  - created signout
  - added update profile
+ - BugFix:sign up user displayname and profile picture update(in handlesignUp function)
+ - BugFix: if the user is not logged in Redirect /browse to Login and vice -versa
+ - Unsbuscribed to the onAuthStateChanged callback(when component unmount we should unsubscribe)
+ -Register TMDB api and create an app& get access token
+ - get data from tmdb now playing movie list API
 # Features
 -Login/Sign up
     - Sign in/sign up
@@ -143,3 +148,5 @@ is called whenever user signed in signed out this will be called automatically
  place this in useEffect(because u want to call these only once)
 
  # useNavigate is a hook used to navigate
+
+ # keeping useEffect(onAuthStateChanged) in header because the header always stay through out our app 

@@ -3,16 +3,17 @@ import Header from './Header'
 import checkValidation from '../utils/validate'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../utils/firebase'
-import { useNavigate } from 'react-router-dom';
+
 import { updateProfile } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { BACKGROUND_URL,USER_AVATAR } from '../utils/constants';
 
 const Login = () => {
 
     const[signInForm,setSignInForm]=useState(true)
     const[errorMessage,setErrorMessage]=useState(null)
-    const navigate=useNavigate()
+  
     const dispatch=useDispatch()
 
     const email=useRef(null)
@@ -38,7 +39,7 @@ const Login = () => {
         await updateProfile(userCredential.user, {
           
           displayName: name.current?.value||"guest",
-          photoURL: "https://i.pravatar.cc/150?img=3", // optional
+          photoURL: USER_AVATAR, // optional
         });
          
        
@@ -48,7 +49,7 @@ const Login = () => {
             uid: userCredential.user.uid,
             email: userCredential.user.email,
             displayName: name.current?.value || "guest",
-            photoURL: "https://i.pravatar.cc/150?img=3",
+            photoURL: USER_AVATAR,
           })
         );
 
@@ -79,11 +80,11 @@ const Login = () => {
 
       if(!signInForm){
         handleSignUp()
-        navigate('/browse')
+        
       }
       else{
        handleSignIn()
-       navigate('/browse')
+      
       }
     }
 
@@ -92,7 +93,7 @@ const Login = () => {
     <div>
         <Header />
         <div>
-          <img src="https://cdn.neowin.com/news/images/uploaded/2023/05/1683747988_background-size1920x1080-4e1694a6-75aa-4c36-9d4d-7fb6a3102005-bc5318781aad7f5c8520.jpg"
+          <img src={ BACKGROUND_URL}
            alt="logo"
            className='absolute'/>
         </div>
