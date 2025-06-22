@@ -90,6 +90,27 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
  - Unsbuscribed to the onAuthStateChanged callback(when component unmount we should unsubscribe)
  -Register TMDB api and create an app& get access token
  - get data from tmdb now playing movie list API
+ - Custom hook for now playing moves
+ - update store with movies data
+ - Planning for MainContainer & secondary       container
+ - Fetch data for trailer video
+ - update store with trailer video data
+ - embedded the youtube video and make it autoplay and mute
+ - tailwind classes to make main container look awesome
+ - Build Secondary component
+ - build movie list
+ - build movie card
+ - tmdb img cdn url
+ - usePopularMovies hook
+ - GPT search page
+ - GPT search bar
+ - {Bonus} Multi-language feature in our app
+ 
+
+
+
+
+
 # Features
 -Login/Sign up
     - Sign in/sign up

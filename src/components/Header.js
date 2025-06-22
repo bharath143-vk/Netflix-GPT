@@ -9,12 +9,16 @@ import { removeUser } from '../utils/userSlice'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect } from 'react';
 import { LOGO_URL, USER_AVATAR } from '../utils/constants';
-
+import { gptSearchClick } from '../utils/gptSlice';
+import { supportedLanguages } from '../utils/constants';
+import { changeLanguage } from '../utils/configSlice';
 
 const Header = () => {
   const navigate=useNavigate()
   const dispatch=useDispatch()
   const user=useSelector(store=>(store.user))
+  const showGptSearch=useSelector((store)=>store.gpt.gptSearchView)
+ 
   const handleSignOut= async () => {
     try {
       await signOut(auth);
@@ -24,6 +28,14 @@ const Header = () => {
       
     }
   };
+  const handleGptSearch=()=>{
+    dispatch(gptSearchClick())
+  }
+
+  const handleLanguageChange=(e)=>{
+    console.log(e.target.value)
+    dispatch(changeLanguage(e.target.value))
+  }
 
   useEffect(()=>{
    
@@ -51,13 +63,27 @@ const Header = () => {
          alt="logo"
         />
       </div>
+
       {user &&  (
         <div className='flex '>
+          { showGptSearch &&
+          <select className='m-4  px-4' onClick={handleLanguageChange}>
+            {
+              supportedLanguages.map((lang)=>(
+                <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>
+              ))
+            }
+          </select>
+          }
+          <button className='m-4  px-4 bg-blue-700 text-white rounded-lg'
+           onClick={handleGptSearch}>
+            {showGptSearch?"HomePage":"GPT Search" }
+            </button>
           <div className='w-12 py-4'>
             <img src={USER_AVATAR} />
           </div>
-        
-          <button className="py-2 border-black font-bold text-white"onClick={handleSignOut}>Sign Out</button>
+          <button className="py-2 border-black font-bold text-white"
+            onClick={handleSignOut}>Sign Out</button>
         </div>
       )}
     </div>

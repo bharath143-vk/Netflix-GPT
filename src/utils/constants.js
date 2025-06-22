@@ -11,3 +11,11 @@ export const API_OPTIONS= {
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNDkzNzhmNTcwNzNmZWVhYTEyZjA2NmZkODI5NDJkMCIsIm5iZiI6MTc1MDMwNjgzMC44ODk5OTk5LCJzdWIiOiI2ODUzOTAwZTZmMzJkYjJjMGQ1NTA0OTQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.x0rdrZ8yPC0hPZoNZ6ABgUI5ZpGoq2gWAUQE_D1_nZ4'
   }
 };
+// movie card image
+export const IMG_CDN="https://image.tmdb.org/t/p/w500/"
+
+export const supportedLanguages=[
+  {identifier:"en",name:"English"},
+  {identifier:"hin",name:"Hindi"},
+  {identifier:"tel",name:"Telugu"}
+]
