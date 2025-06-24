@@ -1,11 +1,14 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import MovieList from './MovieList'
 import MovieCard from './MovieCard'
 
-const MovieList = ({title,movies}) => {
+const GptMovieSuggestions = () => {
+  const movies=useSelector((store)=>store.gpt?.gptMovies)
+
   return (
-    <div className='px-6'>
-        <h1 className=' text-2xl md:text-3xl text-white py-4 px-4'>{title}</h1>
-          <div className='flex overflow-x-auto space-x-4 p-4 scrollbar-hide'>
+    <div className='bg-black'>
+        <div className=' flex overflow-x-auto space-x-4 p-4 scrollbar-hide'>
           <div className='flex '>
               {
                   movies && movies.map((movie)=>
@@ -14,8 +17,9 @@ const MovieList = ({title,movies}) => {
 
           </div>
        </div>
+
     </div>
   )
 }
 
-export default MovieList
+export default GptMovieSuggestions

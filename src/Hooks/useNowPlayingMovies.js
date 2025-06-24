@@ -2,20 +2,22 @@ import { useEffect } from "react"
 import { API_OPTIONS } from "../utils/constants"
 import { useDispatch } from "react-redux"
 import { addnowPlayingMovies } from "../utils/movieSlice"
+import { useSelector } from "react-redux"
 const useNowPlayingMovies=()=>{
     const dispatch=useDispatch()
-    
+    const nowPlayingMovies=useSelector((store)=>store.movies.nowPlayingMovies)
+
     const getMoviesList= async ()=>{
         const data=await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', API_OPTIONS)
         const json=await data.json()
-        console.log(json.results)
+       
         dispatch(addnowPlayingMovies(json.results))
     }
 
     useEffect(()=>{
-        console.log('Before fetching')
-        getMoviesList()
-        console.log('After fetching')
+        //memoization
+       !nowPlayingMovies && getMoviesList()
+        
     },[])
 
 

@@ -95,11 +95,11 @@ const Login = () => {
         <div>
           <img src={ BACKGROUND_URL}
            alt="logo"
-           className='absolute'/>
+           className='absolute h-screen object-cover w-screen'/>
         </div>
         <div>
             <form 
-            className=' absolute w-3/12 p-10  mx-auto my-44 left-0 right-0 bg-black text-white bg-opacity-80'
+            className=' absolute w-9/12 p-10  mx-auto my-44 left-0 right-0 bg-black text-white bg-opacity-80 md:w-3/12'
             onSubmit={(e)=> e.preventDefault()}>
                 <h2 className='text-3xl p-2 m-2 font-bold'>{signInForm?"Sign in":"Sign up"}</h2>
                 {

@@ -19,3 +19,5 @@ export const supportedLanguages=[
   {identifier:"hin",name:"Hindi"},
   {identifier:"tel",name:"Telugu"}
 ]
+
+export const OPEN_AI_KEY=process.env.REACT_APP_OPENAI_KEY

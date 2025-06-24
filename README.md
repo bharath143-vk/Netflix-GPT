@@ -105,7 +105,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
  - GPT search page
  - GPT search bar
  - {Bonus} Multi-language feature in our app
- 
+ - search api call
+ - fetchec movies from slice
+ - created gptslice and added movies data
+ - memoization
+ - adding .env file
+ -added .env to gitignore
+ - made responsive
 
 
 
@@ -171,3 +177,5 @@ is called whenever user signed in signed out this will be called automatically
  # useNavigate is a hook used to navigate
 
  # keeping useEffect(onAuthStateChanged) in header because the header always stay through out our app 
+
+ # memoization helps to get rid of to many api calls
